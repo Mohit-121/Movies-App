@@ -17,8 +17,17 @@ class App extends React.Component{
 
     console.log('STATE',store.getState());
   }
+
+  isMovieFavourite = (movie) =>{
+    const {favourites} = this.props.store.getState();
+    const index = favourites.indexOf(movie);
+    if(index===-1) return false;
+    return true;
+  }
+
   render(){
     const {list}=this.props.store.getState();
+    console.log(this.props.store.getState());
     return (
       <div className="App">
         <Navbar />
@@ -30,7 +39,12 @@ class App extends React.Component{
           
           <div className="list">
             {list.map( (movie,index) => (
-              <MovieCard movie={movie} key={`movies-${index}`}/>
+              <MovieCard 
+              movie={movie} 
+              key={`movies-${index}`}
+              store={this.props.store}
+              isFavourite={this.isMovieFavourite(movie)}
+            />
             ))}
           </div>
         </div>
