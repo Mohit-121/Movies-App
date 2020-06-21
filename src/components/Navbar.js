@@ -1,6 +1,7 @@
 import React from 'react';
 import { data } from '../data';
 import {handleMovieSearch,addMovieToList} from '../actions';
+import { movies } from '../reducers';
 
 class Navbar extends React.Component {
   
@@ -25,16 +26,17 @@ class Navbar extends React.Component {
     this.props.dispatch(handleMovieSearch(searchText));
   };
   render (){
-    const { result: movie,showSearchResults } = this.props.search;
+    const { result: movies,showSearchResults } = this.props.search;
     return (
       <div className="nav">
         <div className="search-container">
           <input onChange={this.handleChange} placeholder="Search..."/>
           <button id="search-btn" onClick={this.handleSearch}>Search</button>
 
-          {showSearchResults && 
+          {showSearchResults &&
             <div className="search-results">
-              <div className="search-result">
+              { movies.map((movie,index) => (
+              <div className="search-result" key={`movies-${index}`}>
                 <img src={movie.Poster} alt="search-pic" />
 
                 <div className="movie-info">
@@ -42,6 +44,7 @@ class Navbar extends React.Component {
                   <button onClick={()=> this.handleAddToMovies(movie)}>Add to Movies</button>
                 </div>
               </div>
+              ))}
             </div>
           }
         </div>
