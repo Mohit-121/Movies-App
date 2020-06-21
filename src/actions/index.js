@@ -39,9 +39,13 @@ export function handleMovieSearch(movie){
     return function(dispatch){
         fetch(url).then(response => response.json())
         .then(movies => {
-            console.log('movie',movies.Search);
+            if(movies.Response!=='False'){
+                console.log('movies',movies.Search);
+                dispatch(addMovieSearchResult(movies.Search));
+            }else{
+                dispatch(addMovieSearchResult([]));
+            }
             // dispatch action
-            dispatch(addMovieSearchResult(movies.Search));
         });
     }
 }

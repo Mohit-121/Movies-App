@@ -45,6 +45,7 @@ class Navbar extends React.Component {
                 </div>
               </div>
               ))}
+              {movies.length===0?<div className='no-movies'>No movies to display!!!</div>:null}
             </div>
           }
         </div>
