@@ -44,7 +44,7 @@ export function movies(state=initialMoviesState,action){
 }
 
 const initialSearchState = {
-    result: [],
+    result: {},
     showSearchResults: false
 };
 export function search(state=initialSearchState,action){
@@ -52,7 +52,7 @@ export function search(state=initialSearchState,action){
         case ADD_SEARCH_RESULT:
             return {
                 ...state,
-                result: [...action.movies],
+                result: action.movie,
                 showSearchResults: true
             }
         case ADD_MOVIE_TO_LIST:

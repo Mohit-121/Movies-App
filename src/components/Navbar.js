@@ -26,7 +26,7 @@ class Navbar extends React.Component {
     this.props.dispatch(handleMovieSearch(searchText));
   };
   render (){
-    const { result: movies,showSearchResults } = this.props.search;
+    const { result: movie,showSearchResults } = this.props.search;
     return (
       <div className="nav">
         <div className="search-container">
@@ -35,8 +35,8 @@ class Navbar extends React.Component {
 
           {showSearchResults &&
             <div className="search-results">
-              { movies.map((movie,index) => (
-              <div className="search-result" key={`movies-${index}`}>
+              {movie.Response!=='False' &&
+              <div className="search-result">
                 <img src={movie.Poster} alt="search-pic" />
 
                 <div className="movie-info">
@@ -44,8 +44,8 @@ class Navbar extends React.Component {
                   <button onClick={()=> this.handleAddToMovies(movie)}>Add to Movies</button>
                 </div>
               </div>
-              ))}
-              {movies.length===0?<div className='no-movies'>No movies to display!!!</div>:null}
+              }
+              {movie.Response==='False'?<div className='no-movies'>No such Title found!!!</div>:null}
             </div>
           }
         </div>

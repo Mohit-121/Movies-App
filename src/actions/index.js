@@ -35,25 +35,21 @@ export function addMovieToList(movie){
 }
 
 export function handleMovieSearch(movie){
-    const url=`http://www.omdbapi.com/?apikey=3ca5df7&s=${movie}`;
+    const url=`http://www.omdbapi.com/?apikey=3ca5df7&t=${movie}`;
     return function(dispatch){
         fetch(url).then(response => response.json())
-        .then(movies => {
-            if(movies.Response!=='False'){
-                console.log('movies',movies.Search);
-                dispatch(addMovieSearchResult(movies.Search));
-            }else{
-                dispatch(addMovieSearchResult([]));
-            }
+        .then(movie => {
+            console.log('movie',movie);
             // dispatch action
+            dispatch(addMovieSearchResult(movie));
         });
     }
 }
 
-export function addMovieSearchResult(movies){
+export function addMovieSearchResult(movie){
     return {
         type: ADD_SEARCH_RESULT,
-        movies
+        movie
     };
 }
 
