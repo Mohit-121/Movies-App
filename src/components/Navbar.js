@@ -1,7 +1,5 @@
 import React from 'react';
-import { data } from '../data';
 import {handleMovieSearch,addMovieToList} from '../actions';
-import { movies } from '../reducers';
 
 class Navbar extends React.Component {
   
